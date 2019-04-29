@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body background="img/kruising.png">
+
+<form>
+    <h1>Kruising de laatse aflevring "finale"?</h1>
+
+    <input type="button" value="werkt" onclick="werkt()">
+    <input type="button" value="knipperen" onclick="knipperen()">
+    <input type="button" value="verdwenen" onclick="verdwenen()">
+
+    <input type="button" value="GO" onclick="begin()">
+    <input type="button" value="stop" onclick="stop()">
+    <input type="button" value="again" onclick="again()">
+    <p> hier zijn de knopen graad 1x drukken</p>
+    <img id="ferrari" src="./img/autogroen.png" width="40px" height="80px">
+    <img id="ferrari2" src="./img/autorood3.png" width="40px" height="80px">
+    <img id="ferrari3" src="./img/autorood2.png" width="80px" height="80px">
+    <img id="ferrari4" src="./img/autoblauw.png" width="80px" height="40px">
+
+
+    <img id="stoplicht" src="./img/stoplichtuit.png" width="20px" height="40px">
+    <img id="stoplicht2" src="./img/stoplichtuit.png" width="20px" height="40px">
+    <img id="stoplicht3" src="./img/stoplichtuit3.png" width="40px" height="20px">
+    <img id="stoplicht4" src="./img/stoplichtuit3.png" width="40px" height="20px">
+
+
+    /---\
+    [0=0]
+
+</form>
+
+<script>
+
+    var sinassappel = true;
+    var kiwi = false;
+
+    var rijden;
+    var werken;
+    var buitenwerking;
+
+    var ferrari = document.getElementById("ferrari");
+    ferrari.style.position = "absolute";
+    ferrari.style.left = "650px";
+    ferrari.style.bottom = "-60px";
+
+    var ferrari2 = document.getElementById("ferrari2");
+    ferrari2.style.position = "absolute";
+    ferrari2.style.left = "550px";
+    ferrari2.style.top = "-80px";
+
+    var ferrari3 = document.getElementById("ferrari3");
+    ferrari3.style.position = "absolute";
+    ferrari3.style.left = "0px";
+    ferrari3.style.top = "440px";
+
+    var ferrari4 = document.getElementById("ferrari4");
+    ferrari4.style.position = "absolute";
+    ferrari4.style.right = "-200px";
+    ferrari4.style.top = "370px";
+
+    var stoplicht = document.getElementById("stoplicht");
+    stoplicht.style.position = "absolute";
+    stoplicht.style.left = "715px";
+    stoplicht.style.bottom = "105px";
+
+    var stoplicht2 = document.getElementById("stoplicht2");
+    stoplicht2.style.position = "absolute";
+    stoplicht2.style.left = "515px";
+    stoplicht2.style.top = "325px";
+    stoplicht2.style.transform = "rotate(180)";
+
+    var stoplicht3 = document.getElementById("stoplicht3");
+    stoplicht3.style.position = "absolute";
+    stoplicht3.style.left = "495px";
+    stoplicht3.style.top = "503px";
+
+    var stoplicht4 = document.getElementById("stoplicht4");
+    stoplicht4.style.position = "absolute";
+    stoplicht4.style.left = "710px";
+    stoplicht4.style.top = "350px";
+
+    function begin() {
+
+        rijden = setTimeout(begin, 10);
+
+        if (parseInt(ferrari.style.bottom) > 700) {
+            ferrari.style.bottom = '-80px'
+        }
+
+        if (parseInt(ferrari2.style.top) > 800) {
+            ferrari2.style.top = '-80px'
+        }
+
+        if (parseInt(ferrari3.style.left) > 1270) {
+            ferrari3.style.left = "80px";
+        }
+
+        if (parseInt(ferrari4.style.right) > 1400) {
+            ferrari4.style.right = "80px";
+        }
+
+        if (kiwi === false && parseInt(ferrari.style.bottom) === 70) {
+            speed = 0;
+        }
+        else {
+            speed = 5;
+        }
+
+        if (kiwi === false && parseInt(ferrari2.style.top) === 280) {
+            speed2 = 0;
+        }
+        else {
+            speed2 = 5;
+        }
+
+        if (kiwi === true && parseInt(ferrari3.style.left) === 450) {
+            speed3 = 0;
+        }
+        else {
+            speed3 = 5;
+        }
+
+        if (kiwi === true && parseInt(ferrari4.style.right) === 480) {
+            speed4 = 0;
+        }
+        else {
+            speed4 = 5;
+        }
+
+        ferrari.style.bottom = parseInt(ferrari.style.bottom) + speed + 'px';
+        ferrari2.style.top = parseInt(ferrari2.style.top) + speed2 + 'px';
+        ferrari3.style.left = parseInt(ferrari3.style.left) + speed3 + 'px';
+        ferrari4.style.right = parseInt(ferrari4.style.right) + speed4 + 'px';
+
+    }
+
+    function stop() {
+        clearTimeout(rijden);
+    }
+
+    function again() {
+        clearTimeout(rijden);
+        ferrari.style.bottom = '600px';
+        ferrari2.style.top = '-30px';
+        ferrari3.style.left = '-10px';
+        ferrari4.style.right = '10px';
+    }
+
+    function werkt() {
+        clearTimeout(buitenwerking);
+        maakRoodGroen();
+        werken = setTimeout(maakRoodGeel, 4000);
+        werken = setTimeout(maakRoodRood, 6000);
+        werken = setTimeout(maakGroenRood, 8000);
+        werken = setTimeout(maakGeelRood, 12000);
+        werken = setTimeout(maakRoodRood, 15000);
+        werken = setTimeout(werkt, 17000);
+    }
+
+    function knipperen() {
+        clearTimeout(werken);
+        maakGeel();
+        buitenwerking = setTimeout(gone, 500);
+        buitenwerking = setTimeout(knipperen, 1000);
+    }
+
+    function verdwenen() {
+        gone();
+        clearTimeout(buitenwerking);
+        clearTimeout(werken);
+    }
+
+    function maakRoodGroen() {
+        stoplicht.src = "./img/stoplichtrood.png";
+        stoplicht2.src = "./img/stoplichtrood2.png";
+        stoplicht3.src = "./img/stoplichtgroen3.png";
+        stoplicht4.src = "./img/stoplichtgroen4.png";
+        druiven = true;
+        kiwi = false;
+    }
+
+    function maakRoodGeel() {
+        stoplicht.src = "./img/stoplichtrood.png";
+        stoplicht2.src = "./img/stoplichtrood2.png";
+        stoplicht3.src = "./img/stoplichtgeel3.png";
+        stoplicht4.src = "./img/stoplichtgeel4.png";
+        druiven = true;
+        kiwi = false;
+    }
+
+    function maakGroenRood() {
+        stoplicht.src = "./img/stoplichtgroen.png";
+        stoplicht2.src = "./img/stoplichtgroen2.png";
+        stoplicht3.src = "./img/stoplichtrood3.png";
+        stoplicht4.src = "./img/stoplichtrood4.png";
+        druiven = false;
+        kiwi = true;
+    }
+
+    function maakGeelRood() {
+        stoplicht.src = "./img/stoplichtgeel.png";
+        stoplicht2.src = "./img/stoplichtgeel2.png";
+        stoplicht3.src = "./img/stoplichtrood3.png";
+        stoplicht4.src = "./img/stoplichtrood4.png";
+        druiven = false;
+        kiwi = true;
+    }
+
+    function maakRoodRood() {
+        stoplicht.src = "./img/stoplichtrood.png";
+        stoplicht2.src = "./img/stoplichtrood2.png";
+        stoplicht3.src = "./img/stoplichtrood3.png";
+        stoplicht4.src = "./img/stoplichtrood4.png";
+        druiven = true;
+        kiwi = true;
+    }
+
+    function gone() {
+        stoplicht.src = "./img/stoplichtuit.png";
+        stoplicht2.src = "./img/stoplichtuit2.png";
+        stoplicht3.src = "./img/stoplichtuit3.png";
+        stoplicht4.src = "./img/stoplichtuit4.png";
+    }
+
+    function maakGeel() {
+        stoplicht.src = "./img/stoplichtgeel.png";
+        stoplicht2.src = "./img/stoplichtgeel2.png";
+        stoplicht3.src = "./img/stoplichtgeel3.png";
+        stoplicht4.src = "./img/stoplichtgeel4.png";
+    }
+
+</script>
+</body>
+</html>
